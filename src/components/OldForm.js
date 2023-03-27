@@ -4,7 +4,7 @@ import './form.css'
 import * as Yup from 'yup'
 
 
-const Form = () => {
+const OldForm = () => {
 
     const initialValues = {
         name: '',
@@ -96,4 +96,4 @@ const Form = () => {
     )
 }
 
-export default Form
+export default OldForm
