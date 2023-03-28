@@ -118,10 +118,10 @@ const YoutubeForm = () => {
                                                         className='inputField' />
                                                         {
                                                             index>0 && 
-                                                            <button onClick={() => remove(index)} className='btn'>-</button>
+                                                            <button onClick={() => remove(index)}>-</button>
                                                         }
                                                     
-                                                    <button onClick={() => push('')} className='btn'>+</button>
+                                                    <button onClick={() => push('')}>+</button>
                                                 </div>
                                             ))
                                         }
