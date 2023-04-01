@@ -19,16 +19,25 @@ const YoutubeForm = () => {
         mobNos: ['', ''],
         phNos: ['']
     }
-    const onSubmit = values => {
+    const onSubmit = (values, onSubmitProps) => {
         console.log("Form Data : ", values)
+        console.log("on Submit props",onSubmitProps)
+        onSubmitProps.resetForm()
     }
 
     const validationSchema = Yup.object({
         name: Yup.string().required('Required...!'),
         email: Yup.string().required('Required...!').email('Invalid email format'),
         channel: Yup.string().required('Required...!'),
-        comments: Yup.string().required('Required...!')
     })
+
+    const validateComments = (value)=>{
+        let error
+        if(!value){
+            error = 'Required'
+        }
+        return error
+    }
 
 
     // console.log(formik.values)
@@ -76,8 +85,9 @@ const YoutubeForm = () => {
                             placeholder='Enter Your Comment'
                             id='comments'
                             name='comments'
+                            validate={validateComments}
                         />
-                        <ErrorMessage name='comments' component={TextError} />
+                        <ErrorMessage name='comments' component={TextError}/>
                         <br />
                         <Field
                             className='inputField'
@@ -106,7 +116,7 @@ const YoutubeForm = () => {
                         <FieldArray name='phNos'>
                             {
                                 (fieldArrayProps) => {
-                                    console.log(fieldArrayProps)
+                                    // console.log(fieldArrayProps)
                                     const { push, remove, form } = fieldArrayProps
                                     const { values } = form
                                     const { phNos } = values
@@ -115,13 +125,13 @@ const YoutubeForm = () => {
                                             phNos.map((phNo, index) => (
                                                 <div key={index}>
                                                     <Field name={`phNos[${index}]`}
-                                                        className='inputField' />
+                                                        className='inputField' placeholder='Enter Your Phone Number' />
                                                         {
                                                             index>0 && 
-                                                            <button onClick={() => remove(index)}>-</button>
+                                                            <button type='button' onClick={() => remove(index)}>-</button>
                                                         }
                                                     
-                                                    <button onClick={() => push('')}>+</button>
+                                                    <button type='button' onClick={() => push('')}>+</button>
                                                 </div>
                                             ))
                                         }
